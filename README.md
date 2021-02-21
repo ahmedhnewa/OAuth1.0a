@@ -1,7 +1,7 @@
 # oAuth1
 A Library To Add OAuth 1.0a Easily With Retrofit
 
-Release :
+Last Release :
 [![](https://jitpack.io/v/AhmedRiyadh441/oAuth1.svg)](https://jitpack.io/#AhmedRiyadh441/oAuth1)
 
 To Add The Library to your Project :
