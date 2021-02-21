@@ -15,17 +15,12 @@ public class TimestampServiceImpl implements TimestampService {
         timer = new Timer();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     public String getNonce() {
         Long ts = getTs();
         return String.valueOf(ts + timer.getRandomInteger());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public String getTimestampInSeconds() {
         return String.valueOf(getTs());
     }
@@ -40,8 +35,6 @@ public class TimestampServiceImpl implements TimestampService {
 
     /**
      * Inner class that uses {@link System} for generating the timestamps.
-     *
-     * @author Pablo Fernandez
      */
     static class Timer {
         private final Random rand = new Random();
