@@ -1,0 +1,3 @@
+include ':oAuth1'
+include ':app'
+rootProject.name = "OAtuh1"
