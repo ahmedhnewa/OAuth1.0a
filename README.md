@@ -68,12 +68,16 @@ If You Dont Want To Add Token or TokenSecret
                     .build();
 		    
 if you are using this library it for 
-		https://wordpress.org/plugins/rest-api-oauth1/
+
+https://wordpress.org/plugins/rest-api-oauth1/
+WordPress REST API – OAuth 1.0a Server
+
 You Should Make The isShouldExcludeOAuthToken to false (it false by default)
 
 if you are using it for woocommerce rest api
 
-	https://woocommerce.github.io/woocommerce-rest-api-docs/#authentication-over-http
+https://woocommerce.github.io/woocommerce-rest-api-docs/#authentication-over-http
+Woocommerce Plugin
 
 You Should Make The isShouldExcludeOAuthToken to true
 To Get Vaild oauth_signature (important)
