@@ -2,6 +2,8 @@
 a library to add OAuth 1.0  with retrofit
 
 
+[![](https://jitpack.io/v/AhmedRiyadh441/oAuth1.svg)](https://jitpack.io/#AhmedRiyadh441/oAuth1)
+
 to add the library to your porject :
 
 Step 1. Add the JitPack repository to your build file
