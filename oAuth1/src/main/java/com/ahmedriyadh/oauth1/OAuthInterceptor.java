@@ -72,7 +72,7 @@ public class OAuthInterceptor implements Interceptor {
         String signature = new HMACSha1SignatureService().getSignature(baseString, consumerSecret, tokenSecret);
         Log.d("Signature", signature);
 
-        HttpUrl.Builder url = originalHttpUrl.newBuilder()
+        HttpUrl.Builder builder = originalHttpUrl.newBuilder()
                 .addQueryParameter(OAUTH_SIGNATURE_METHOD, OAUTH_SIGNATURE_METHOD_VALUE)
                 .addQueryParameter(OAUTH_CONSUMER_KEY, consumerKey)
                 .addQueryParameter(OAUTH_VERSION, OAUTH_VERSION_VALUE)
@@ -81,11 +81,11 @@ public class OAuthInterceptor implements Interceptor {
                 .addQueryParameter(OAUTH_SIGNATURE, signature);
 
         if (token != null) {
-            url.addQueryParameter(OAUTH_TOKEN, token);
+            builder.addQueryParameter(OAUTH_TOKEN, token);
         }
 
         Request.Builder requestBuilder = original.newBuilder()
-                .url(url.build());
+                .url(builder.build());
 
         Request request = requestBuilder.build();
         return chain.proceed(request);
