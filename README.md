@@ -1,7 +1,7 @@
 # oAuth1
 a library to add OAuth 1.0  with retrofit
 
-
+Release :
 [![](https://jitpack.io/v/AhmedRiyadh441/oAuth1.svg)](https://jitpack.io/#AhmedRiyadh441/oAuth1)
 
 to add the library to your porject :
@@ -22,7 +22,7 @@ Step 2. Add the dependency
 
 
 	dependencies {
-	        implementation 'com.github.AhmedRiyadh441:oAuth1:1.0.0'
+	        implementation 'com.github.AhmedRiyadh441:oAuth1:release-here'
 	}
 
 Usage :
