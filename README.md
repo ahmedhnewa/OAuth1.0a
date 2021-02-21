@@ -38,10 +38,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 // if you do not want add the token
             // just leave it empty
             // for the token secret make it null
-            OAuthInterceptor oauth1WooCommerce = new OAuthInterceptor.Builder().consumerKey("your_consumer_key_here")
+            
+	    
+	    OAuthInterceptor oauth1WooCommerce = new OAuthInterceptor.Builder().consumerKey("your_consumer_key_here")
                     .consumerSecret("your_consumer_secret_here")
                     .token("your_token_here").tokenSecret("your_token_secret_here").build();
-
+		    
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
