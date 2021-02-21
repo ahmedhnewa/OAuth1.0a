@@ -130,8 +130,8 @@ public class OAuthInterceptor implements Interceptor {
 
             if (consumerKey == null) throw new IllegalStateException("consumerKey not set");
             if (consumerSecret == null) throw new IllegalStateException("consumerSecret not set");
-            if (token == null) throw new IllegalStateException("token not set");
-            if (tokenSecret == null) throw new IllegalStateException("tokenSecret not set");
+            /*if (token == null) throw new IllegalStateException("token not set");
+            if (tokenSecret == null) throw new IllegalStateException("tokenSecret not set");*/
 
             return new OAuthInterceptor(consumerKey, consumerSecret, token, tokenSecret);
         }
