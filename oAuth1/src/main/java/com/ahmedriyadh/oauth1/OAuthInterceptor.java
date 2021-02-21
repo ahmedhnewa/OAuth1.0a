@@ -80,7 +80,7 @@ public class OAuthInterceptor implements Interceptor {
                 .addQueryParameter(OAUTH_NONCE, nonce)
                 .addQueryParameter(OAUTH_SIGNATURE, signature);
 
-        if (token != null) {
+        if (token != null && !token.isEmpty()) {
             builder.addQueryParameter(OAUTH_TOKEN, token);
         }
 
