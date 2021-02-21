@@ -112,8 +112,9 @@ public class OAuthInterceptor implements Interceptor {
         }
 
         public Builder token(String token) {
-            if (token == null) throw new NullPointerException("token = null");
-            this.token = token;
+            if (token != null) {
+                this.token = token;
+            }
             return this;
         }
 
