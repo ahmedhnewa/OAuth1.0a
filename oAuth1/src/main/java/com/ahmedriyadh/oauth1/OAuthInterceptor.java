@@ -31,12 +31,14 @@ public class OAuthInterceptor implements Interceptor {
     private final String consumerSecret;
     private final String token;
     private final String tokenSecret;
+    private boolean isShouldExcludeOAuthToken = false;
 
-    private OAuthInterceptor(String consumerKey, String consumerSecret, String token, String tokenSecret) {
+    private OAuthInterceptor(String consumerKey, String consumerSecret, String token, String tokenSecret,Boolean isShouldExcludeOAuthToken) {
         this.consumerKey = consumerKey;
         this.consumerSecret = consumerSecret;
         this.token = token;
         this.tokenSecret = tokenSecret;
+        this.isShouldExcludeOAuthToken = isShouldExcludeOAuthToken;
     }
 
     @Override
@@ -51,13 +53,24 @@ public class OAuthInterceptor implements Interceptor {
         String firstBaseString = original.method() + "&" + urlEncoded(dynamicStructureUrl);
         String generatedBaseString = "";
 
-        if (original.url().encodedQuery() != null) {
-            generatedBaseString = original.url().encodedQuery() + "&oauth_consumer_key=" + consumerKey + "&oauth_nonce=" + nonce +
-                    "&oauth_token=" + token + "&oauth_signature_method=HMAC-SHA1&oauth_timestamp=" + timestamp + "&oauth_version=1.0";
+        if (isShouldExcludeOAuthToken){
+            if (original.url().encodedQuery() != null) {
+                generatedBaseString = original.url().encodedQuery() + "&oauth_consumer_key=" + consumerKey + "&oauth_nonce=" + nonce +
+                        "&oauth_signature_method=HMAC-SHA1&oauth_timestamp=" + timestamp + "&oauth_version=1.0";
+            } else {
+                generatedBaseString = "oauth_consumer_key=" + consumerKey + "&oauth_nonce=" + nonce +
+                        "&oauth_signature_method=HMAC-SHA1&oauth_timestamp=" + timestamp + "&oauth_version=1.0";
+            }
         } else {
-            generatedBaseString = "oauth_consumer_key=" + consumerKey + "&oauth_nonce=" + nonce +
-                    "&oauth_token=" + token + "&oauth_signature_method=HMAC-SHA1&oauth_timestamp=" + timestamp + "&oauth_version=1.0";
+            if (original.url().encodedQuery() != null) {
+                generatedBaseString = original.url().encodedQuery() + "&oauth_consumer_key=" + consumerKey + "&oauth_nonce=" + nonce +
+                        "&oauth_token=" + token + "&oauth_signature_method=HMAC-SHA1&oauth_timestamp=" + timestamp + "&oauth_version=1.0";
+            } else {
+                generatedBaseString = "oauth_consumer_key=" + consumerKey + "&oauth_nonce=" + nonce +
+                        "&oauth_token=" + token + "&oauth_signature_method=HMAC-SHA1&oauth_timestamp=" + timestamp + "&oauth_version=1.0";
+            }
         }
+
 
         ParameterList result = new ParameterList();
         result.addQueryString(generatedBaseString);
@@ -69,7 +82,12 @@ public class OAuthInterceptor implements Interceptor {
         }
         String baseString = firstBaseString + secoundBaseString;
 
-        String signature = new HMACSha1SignatureService().getSignature(baseString, consumerSecret, tokenSecret);
+        String signature = null;
+        if (tokenSecret != null && !tokenSecret.isEmpty()) {
+            signature = new HMACSha1SignatureService().getSignature(baseString, consumerSecret, tokenSecret);
+        } else {
+            signature = new HMACSha1SignatureService().getSignature(baseString, consumerSecret, "");
+        }
         Log.d("Signature", signature);
 
         HttpUrl.Builder builder = originalHttpUrl.newBuilder()
@@ -97,6 +115,7 @@ public class OAuthInterceptor implements Interceptor {
         private String consumerSecret;
         private String token;
         private String tokenSecret;
+        private boolean isShouldExcludeOAuthToken = false;
         private int type;
 
         public Builder consumerKey(String consumerKey) {
@@ -126,6 +145,11 @@ public class OAuthInterceptor implements Interceptor {
             return this;
         }
 
+        public Builder isShouldExcludeOAuthToken(boolean b){
+            isShouldExcludeOAuthToken = b;
+            return this;
+        }
+
         public OAuthInterceptor build() {
 
             if (consumerKey == null) throw new IllegalStateException("consumerKey not set");
@@ -133,7 +157,7 @@ public class OAuthInterceptor implements Interceptor {
             /*if (token == null) throw new IllegalStateException("token not set");
             if (tokenSecret == null) throw new IllegalStateException("tokenSecret not set");*/
 
-            return new OAuthInterceptor(consumerKey, consumerSecret, token, tokenSecret);
+            return new OAuthInterceptor(consumerKey, consumerSecret, token, tokenSecret,isShouldExcludeOAuthToken);
         }
     }
 
