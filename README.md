@@ -38,7 +38,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 	    
-	    OAuthInterceptor oauth1WooCommerce = new OAuthInterceptor.Builder().consumerKey("your_consumer_key_here")
+	    OAuthInterceptor oauth1 = new OAuthInterceptor.Builder().consumerKey("your_consumer_key_here")
                     .consumerSecret("your_consumer_secret_here")
                     .token("your_token_here").tokenSecret("your_token_secret_here").build();
 		    
@@ -49,7 +49,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
             builder.addInterceptor(interceptor);
 
             if (isShouldAddOauth1) {
-                builder.addInterceptor(oauth1WooCommerce);
+	    // if you want add the oauth 1.0 only in specificated requests , if no remove if statment
+                builder.addInterceptor(oauth1);
             }
 
             retrofit = new Retrofit.Builder()
