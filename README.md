@@ -37,9 +37,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-// if you do not want add the token
-            // just leave it empty
-            // for the token secret make it null
+
+
             
 	    
 	    OAuthInterceptor oauth1WooCommerce = new OAuthInterceptor.Builder().consumerKey("your_consumer_key_here")
@@ -61,3 +60,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
                     .client(builder.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
+		    
+if you dont want to add token or tokenSecret
+leave it empty ""
