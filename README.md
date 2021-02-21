@@ -62,4 +62,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
                     .build();
 		    
 if you dont want to add token or tokenSecret
-leave it empty ""
+
+OAuthInterceptor oauth1WooCommerce = new OAuthInterceptor.Builder().consumerKey(CONSUMER_KEY)
+                    .consumerSecret(CONSUMER_SECRET)
+                    .token(null)
+                    .tokenSecret(null)
+                    .isShouldExcludeOAuthToken(true)
+                    .build();
+		    
+if you are using this library it for 
+https://wordpress.org/plugins/rest-api-oauth1/
+make the isShouldExcludeOAuthToken to false (it false by default)
+
+if you are using it for woocommerce rest api
+https://woocommerce.github.io/woocommerce-rest-api-docs/#authentication-over-http
+make the isShouldExcludeOAuthToken to true
+to get vaild oauth_signature (important)
+
+In other cases, it is due to your choice and what is required, always check the instructions
