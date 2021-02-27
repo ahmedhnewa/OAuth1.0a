@@ -42,6 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
                     .consumerSecret("your_consumer_secret_here")
                     .token("your_token_here").tokenSecret("your_token_secret_here").build();
 		    
+		//optional
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -49,7 +50,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
             builder.addInterceptor(interceptor);
 
             if (isShouldAddOauth1) {
-	    // if you want add the oauth 1.0 only in specificated requests , if no remove if statment
+	    // if you want add the oauth 1.0 authorization only in specificated requests , if no remove if statment
                 builder.addInterceptor(oauth1);
             }
 
