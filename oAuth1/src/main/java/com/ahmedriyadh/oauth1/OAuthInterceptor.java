@@ -58,7 +58,7 @@ public class OAuthInterceptor implements Interceptor {
         String firstBaseString = original.method() + "&" + urlEncoded(dynamicStructureUrl);
         String generatedBaseString = "";
 
-        if (isShouldExcludeOAuthToken || TextUtils.isEmpty(token)) {
+        if (isShouldExcludeOAuthToken || token == null || token.isEmpty()) {
             if (original.url().encodedQuery() != null) {
                 generatedBaseString = original.url().encodedQuery() + "&oauth_consumer_key=" + consumerKey + "&oauth_nonce=" + nonce +
                         "&oauth_signature_method=HMAC-SHA1&oauth_timestamp=" + timestamp + "&oauth_version=1.0";
@@ -88,7 +88,7 @@ public class OAuthInterceptor implements Interceptor {
         String baseString = firstBaseString + secoundBaseString;
 
         String signature = null;
-        if (tokenSecret != null && !tokenSecret.isEmpty()) {
+        if (tokenSecret != null && !tokenSecret.isEmpty() && !isShouldExcludeOAuthToken) {
             signature = new HMACSha1SignatureService().getSignature(baseString, consumerSecret, tokenSecret);
         } else {
             signature = new HMACSha1SignatureService().getSignature(baseString, consumerSecret, "");
