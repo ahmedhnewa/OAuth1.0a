@@ -1,5 +1,6 @@
 package com.ahmedriyadh.oauth1;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 
@@ -17,8 +18,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /*
-* Edited and Updated By AhmedRiyadh
-* */
+ * Edited and Updated By AhmedRiyadh
+ * */
 
 public class OAuthInterceptor implements Interceptor {
     private static final String OAUTH_CONSUMER_KEY = "oauth_consumer_key";
@@ -37,7 +38,7 @@ public class OAuthInterceptor implements Interceptor {
     private final String tokenSecret;
     private boolean isShouldExcludeOAuthToken = false;
 
-    private OAuthInterceptor(String consumerKey, String consumerSecret, String token, String tokenSecret,Boolean isShouldExcludeOAuthToken) {
+    private OAuthInterceptor(String consumerKey, String consumerSecret, String token, String tokenSecret, Boolean isShouldExcludeOAuthToken) {
         this.consumerKey = consumerKey;
         this.consumerSecret = consumerSecret;
         this.token = token;
@@ -57,7 +58,7 @@ public class OAuthInterceptor implements Interceptor {
         String firstBaseString = original.method() + "&" + urlEncoded(dynamicStructureUrl);
         String generatedBaseString = "";
 
-        if (isShouldExcludeOAuthToken){
+        if (isShouldExcludeOAuthToken || TextUtils.isEmpty(token)) {
             if (original.url().encodedQuery() != null) {
                 generatedBaseString = original.url().encodedQuery() + "&oauth_consumer_key=" + consumerKey + "&oauth_nonce=" + nonce +
                         "&oauth_signature_method=HMAC-SHA1&oauth_timestamp=" + timestamp + "&oauth_version=1.0";
@@ -149,7 +150,7 @@ public class OAuthInterceptor implements Interceptor {
             return this;
         }
 
-        public Builder isShouldExcludeOAuthToken(boolean b){
+        public Builder isShouldExcludeOAuthToken(boolean b) {
             isShouldExcludeOAuthToken = b;
             return this;
         }
@@ -161,7 +162,7 @@ public class OAuthInterceptor implements Interceptor {
             /*if (token == null) throw new IllegalStateException("token not set");
             if (tokenSecret == null) throw new IllegalStateException("tokenSecret not set");*/
 
-            return new OAuthInterceptor(consumerKey, consumerSecret, token, tokenSecret,isShouldExcludeOAuthToken);
+            return new OAuthInterceptor(consumerKey, consumerSecret, token, tokenSecret, isShouldExcludeOAuthToken);
         }
     }
 
