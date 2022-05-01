@@ -40,7 +40,7 @@ afterEvaluate {
 
                 groupId = 'com.github.ahmedhnewa'
                 artifactId = 'oauth1.0a'
-                version = '1.0'
+                version = '1.0.6'
             }
         }
     }
