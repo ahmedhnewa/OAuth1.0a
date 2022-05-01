@@ -1,5 +1,6 @@
 # oAuth1
-A simple library to use OAuth 1.0a Authentication with Retrofit
+A simple library to use OAuth 1.0a Authentication with Retrofit,
+This library is based on [https://github.com/rameshvoltella/WoocommerceAndroidOAuth1](WoocommerceAndroidOAuth1)
 
 Last Release :
 [![](https://jitpack.io/v/AhmedRiyadh441/oAuth1.svg)](https://jitpack.io/#AhmedRiyadh441/oAuth1)
