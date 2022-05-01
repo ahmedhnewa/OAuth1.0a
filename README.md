@@ -1,10 +1,10 @@
 # oAuth1
-A Library To Add OAuth 1.0a Easily With Retrofit
+A simple library to use OAuth 1.0a Authentication with Retrofit
 
 Last Release :
 [![](https://jitpack.io/v/AhmedRiyadh441/oAuth1.svg)](https://jitpack.io/#AhmedRiyadh441/oAuth1)
 
-To Add The Library to your Project :
+To add the Library to your project:
 
 Step 1. Add the JitPack repository to your build file
 
@@ -25,8 +25,7 @@ Step 2. Add the dependency
 	        implementation 'com.github.AhmedRiyadh441:oAuth1:1.0.3'
 	}
 
-Usage :
-it Very Easy
+Usage:
 
 import com.ahmedriyadh.oauth1.OAuthInterceptor;
 
@@ -42,17 +41,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
                     .consumerSecret("your_consumer_secret_here")
                     .token("your_token_here").tokenSecret("your_token_secret_here").build();
 		    
-		//optional
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
             OkHttpClient.Builder builder = new OkHttpClient().newBuilder().connectTimeout(3, TimeUnit.MINUTES).readTimeout(3, TimeUnit.MINUTES);
             builder.addInterceptor(interceptor);
-
-            if (isShouldAddOauth1) {
-	    // if you want add the oauth 1.0 authorization only in specificated requests , if no remove if statment
+	    
                 builder.addInterceptor(oauth1);
-            }
 
             retrofit = new Retrofit.Builder()
                     .baseUrl("your_base_url_here/")
@@ -60,7 +55,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 		    
-If You Dont Want To Add Token or TokenSecret
+If you don't want to add token or token secret
 
 		    OAuthInterceptor oauth1WooCommerce = new OAuthInterceptor.Builder().consumerKey(CONSUMER_KEY)
                     .consumerSecret(CONSUMER_SECRET)
@@ -69,19 +64,15 @@ If You Dont Want To Add Token or TokenSecret
                     .isShouldExcludeOAuthToken(true)
                     .build();
 		    
-if you are using this library it for 
-
+If you are using this library it for 
 https://wordpress.org/plugins/rest-api-oauth1/
-WordPress REST API – OAuth 1.0a Server
+WordPress REST API – OAuth 1.0a Server (plugin in Wordpress)
+Then you should pass false to isShouldExcludeOAuthToken() method (it false by default)
 
-You Should Make The isShouldExcludeOAuthToken to false (it false by default)
+If you are using it for woocommerce rest api (for admin user only)
+https://woocommerce.github.io/woocommerce-rest-api-docs/#authentication-over-http (Woocommerce is a plugin in Wordpress)
 
-if you are using it for woocommerce rest api
-
-https://woocommerce.github.io/woocommerce-rest-api-docs/#authentication-over-http
-Woocommerce Plugin
-
-You Should Make The isShouldExcludeOAuthToken to true
-To Get Vaild oauth_signature (important)
+You should pass false to the isShouldExcludeOAuthToken() method (it false by default)
+To get vaild oauth_signature (important)
 
 In other cases, it is due to your choice and what is required, always check the instructions
