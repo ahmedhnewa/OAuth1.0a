@@ -9,19 +9,19 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiClient {
+public class RetrofitInstance {
     private static Retrofit retrofit = null;
+    public static String BASE_URL = "";
 
-    public static ApiInterface getApiInterface(boolean isShouldAddOauth1) {
+    public static Retrofit getRetrofitInstance(boolean useOAuth1) {
         if (retrofit == null) {
-
 
             OAuthInterceptor oauth1WooCommerce = new OAuthInterceptor.Builder()
                     .consumerKey("your_consumer_key_here")
                     .consumerSecret("your_consumer_secret_here")
                     .token("your_token_here")
                     .tokenSecret("your_token_secret_here")
-                    .isShouldExcludeOAuthToken(false)
+//                    .excludeOAuthToken()
                     .build();
 
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -30,16 +30,16 @@ public class ApiClient {
             OkHttpClient.Builder builder = new OkHttpClient().newBuilder().connectTimeout(3, TimeUnit.MINUTES).readTimeout(3, TimeUnit.MINUTES);
             builder.addInterceptor(interceptor);
 
-            if (isShouldAddOauth1) {
+            if (useOAuth1) {
                 builder.addInterceptor(oauth1WooCommerce);
             }
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("your_base_url_here/")
+                    .baseUrl(BASE_URL)
                     .client(builder.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
-        return retrofit.create(ApiInterface.class);
+        return retrofit;
     }
 }

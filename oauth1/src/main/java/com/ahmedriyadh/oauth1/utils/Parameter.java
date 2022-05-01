@@ -1,7 +1,6 @@
 package com.ahmedriyadh.oauth1.utils;
 
 
-
 public class Parameter implements Comparable<Parameter> {
     private static final String UTF = "UTF8";
 

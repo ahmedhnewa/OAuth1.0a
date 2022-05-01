@@ -1,7 +1,7 @@
 package com.ahmedriyadh.oauth1.utils;
 
-/**
- * SHA1 SignatureGenerator
+/*
+  SHA1 SignatureGenerator
  */
 
 import android.util.Base64;

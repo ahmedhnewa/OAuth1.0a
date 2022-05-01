@@ -1,6 +1,6 @@
 package com.ahmedriyadh.oauth1;
 
-import android.text.TextUtils;
+
 import android.util.Log;
 
 
@@ -16,10 +16,6 @@ import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-
-/*
- * Edited and Updated By AhmedRiyadh
- * */
 
 public class OAuthInterceptor implements Interceptor {
     private static final String OAUTH_CONSUMER_KEY = "oauth_consumer_key";
@@ -76,16 +72,15 @@ public class OAuthInterceptor implements Interceptor {
             }
         }
 
-
         ParameterList result = new ParameterList();
         result.addQueryString(generatedBaseString);
         generatedBaseString = result.sort().asOauthBaseString();
 
-        String secoundBaseString = "&" + generatedBaseString;
+        String secondBaseString = "&" + generatedBaseString;
         if (firstBaseString.contains("%3F")) {
-            secoundBaseString = "%26" + urlEncoded(generatedBaseString);
+            secondBaseString = "%26" + urlEncoded(generatedBaseString);
         }
-        String baseString = firstBaseString + secoundBaseString;
+        String baseString = firstBaseString + secondBaseString;
 
         String signature = null;
         if (tokenSecret != null && !tokenSecret.isEmpty() && !isShouldExcludeOAuthToken) {
@@ -150,8 +145,8 @@ public class OAuthInterceptor implements Interceptor {
             return this;
         }
 
-        public Builder isShouldExcludeOAuthToken(boolean b) {
-            isShouldExcludeOAuthToken = b;
+        public Builder excludeOAuthToken() {
+            isShouldExcludeOAuthToken = true;
             return this;
         }
 

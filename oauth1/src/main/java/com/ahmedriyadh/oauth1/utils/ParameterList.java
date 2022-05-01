@@ -1,7 +1,5 @@
 package com.ahmedriyadh.oauth1.utils;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,13 +36,11 @@ public class ParameterList {
     public String appendTo(String url) {
 //        Preconditions.checkNotNull(url, "Cannot append to null URL");
         String queryString = asFormUrlEncodedString();
-        if (queryString.equals(EMPTY_STRING)) {
-            return url;
-        } else {
+        if (!queryString.equals(EMPTY_STRING)) {
             url += url.indexOf(QUERY_STRING_SEPARATOR) != -1 ? PARAM_SEPARATOR : QUERY_STRING_SEPARATOR;
             url += queryString;
-            return url;
         }
+        return url;
     }
 
     public String asOauthBaseString() {
@@ -68,7 +64,7 @@ public class ParameterList {
     public void addQueryString(String queryString) {
         if (queryString != null && queryString.length() > 0) {
             for (String param : queryString.split(PARAM_SEPARATOR)) {
-                String pair[] = param.split(PAIR_SEPARATOR);
+                String[] pair = param.split(PAIR_SEPARATOR);
                 String key = OAuthEncoder.decode(pair[0]);
                 String value = pair.length > 1 ? OAuthEncoder.decode(pair[1]) : EMPTY_STRING;
                 params.add(new Parameter(key, value));
