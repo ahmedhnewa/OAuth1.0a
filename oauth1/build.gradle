@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.library'
-    id 'maven-publish'
 }
 
 android {
@@ -30,18 +29,4 @@ android {
 dependencies {
     // Required Library For OAuthInterceptor Class
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-
-                groupId = 'com.github.ahmedhnewa'
-                artifactId = 'oauth1.0a'
-                version = '1.0'
-            }
-        }
-    }
 }
