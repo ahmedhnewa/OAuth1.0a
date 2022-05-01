@@ -9,7 +9,7 @@ To add the Library to your project:
 
 Step 1. Add the JitPack repository to your build file
 
-Add it in your root build.gradle at the end of repositories:
+Add it in your root build.gradle at the end of repositories, or to settings.gradle in the repositories block:
 
 	allprojects {
 		repositories {
@@ -18,10 +18,10 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
 
-Step 2. Add the dependency to your module
+Step 2. Add the dependency to your module (build.gradle app module)
 
 	dependencies {
-	        implementation 'com.github.AhmedRiyadh441:oAuth1:1.0.5'
+	        implementation 'com.github.ahmedhnewa:OAuth1.0a:1.0.8'
 	}
 
 Usage:
