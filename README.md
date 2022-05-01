@@ -1,4 +1,4 @@
-# oAuth1
+# OAuth 1.0a
 A simple library to use OAuth 1.0a Authentication with Retrofit,
 This library is based on [WoocommerceAndroidOAuth1](https://github.com/rameshvoltella/WoocommerceAndroidOAuth1)
  
