@@ -22,7 +22,7 @@ Step 2. Add the dependency
 
 
 	dependencies {
-	        implementation 'com.github.AhmedRiyadh441:oAuth1:1.0.3'
+	        implementation 'com.github.AhmedRiyadh441:oAuth1:1.0.5'
 	}
 
 Usage:
